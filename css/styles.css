@@ -295,6 +295,30 @@ h1 {
   display: none;
 }
 
+.footer-page {
+  display: flex;
+  flex-direction: row;
+  max-width: max-content;
+  max-height: min-content;
+  gap: 0.5rem;
+}
+
+.copy {
+  color: var(--muted);
+}
+
+.copy span {
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.author a {
+  color: var(--blue-dark);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
 @media (max-width: 520px) {
   .page {
     align-items: start;
