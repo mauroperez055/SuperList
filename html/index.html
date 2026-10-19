@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Mi Lista Del Súper</title>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="page-title">
+      <header class="header">
+        <p class="eyebrow">Tu próxima visita</p>
+        <h1 id="page-title">Lista del súper</h1>
+        <p class="subtitle">Anotá lo que te falta y listo.</p>
+      </header>
+
+      <form class="form" id="item-form">
+        <input class="form-input" id="item-input" name="item" type="text" placeholder="Ingresá un producto a la lista"
+          aria-label="Producto" maxlength="80" autocomplete="off" required />
+
+        <button class="add" type="submit" aria-label="Agregar producto">
+          +
+        </button>
+      </form>
+
+      <div class="list-header">
+        <h2 class="list-title">Productos</h2>
+        <span class="count" id="pending-count" aria-live="polite"></span>
+      </div>
+
+      <div id="list-content"></div>
+
+      <footer class="footer">
+        <span id="total-count"></span>
+        <button class="clear" id="clear-completed" type="button" hidden>
+          Borrar comprados
+        </button>
+      </footer>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
