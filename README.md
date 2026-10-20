@@ -1,5 +1,8 @@
 # 🛒 Lista del Súper
 
+![Tests](https://github.com/mauroperez055/SuperList/actions/workflows/tests.yml/badge.svg)
+[![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](LICENSE)
+
 App web estática para armar la lista de la compra. Agregás productos, marcás los que ya
 compraste y la lista **se conserva al recargar la página**.
 
@@ -96,6 +99,7 @@ listaSuperApp/
 ├── index.html            # Markup + orden de carga de los scripts
 ├── package.json          # Scripts de npm (start, test)
 ├── .gitignore
+├── LICENSE               # MIT
 ├── add-to-cart.png       # Favicon
 ├── css/
 │   └── styles.css        # Estilos (incluye el aviso de storage no persistente)
@@ -268,6 +272,12 @@ excluirlos del deploy si tu hosting lo permite.
 - **Navegador**: cualquier navegador moderno (Chrome, Edge, Firefox, Safari 14+).
 - **Node.js**: 18.13 o superior — solo para desarrollo y para correr los tests.
   La app en producción no necesita Node.
+
+---
+
+## 📄 Licencia
+
+[MIT](LICENSE) © 2026 Mauro Perez
 
 ---
 

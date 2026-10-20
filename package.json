@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Lista del súper — app web estática con persistencia en localStorage",
+  "license": "MIT",
   "scripts": {
     "start": "node scripts/serve.js",
     "test": "node --test",
