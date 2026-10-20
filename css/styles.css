@@ -295,6 +295,21 @@ h1 {
   display: none;
 }
 
+.storage-warning {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #f0dcaa;
+  border-radius: 10px;
+  background: #fdf6e7;
+  color: #8a6417;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.storage-warning[hidden] {
+  display: none;
+}
+
 .footer-page {
   display: flex;
   flex-direction: row;

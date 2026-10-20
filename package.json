@@ -1,0 +1,14 @@
+{
+  "name": "lista-super-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lista del súper — app web estática con persistencia en localStorage",
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch"
+  },
+  "engines": {
+    "node": ">=18.13.0"
+  }
+}
