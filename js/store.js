@@ -47,7 +47,29 @@
 
     idCounter += 1;
 
-    return `id-${Date.now().toString(36)}-${idCounter.toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    return `id-${Date.now().toString(36)}-${idCounter.toString(36)}-${randomSuffix()}`;
+  }
+
+  /**
+   * Sufijo aleatorio para el fallback de ids. Usa un CSPRNG cuando está
+   * disponible y cae a Math.random solo como último recurso.
+   *
+   * @returns {string}
+   */
+  function randomSuffix() {
+    try {
+      if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+        const bytes = new Uint8Array(8);
+
+        crypto.getRandomValues(bytes);
+
+        return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+      }
+    } catch (error) {
+      /* sin CSPRNG: el contador monotónico sigue garantizando unicidad */
+    }
+
+    return Math.random().toString(36).slice(2, 10);
   }
 
   /**

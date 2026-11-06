@@ -51,7 +51,7 @@ No hace falta registrarse ni instalar nada.
   (ids faltantes o duplicados, nombres inválidos, `done` no booleano).
 - **Accesibilidad**: etiquetas `aria-label`, `aria-live` en los contadores y
   navegación por teclado.
-- **39 tests** que corren sin navegador y sin dependencias.
+- **48 tests** que corren sin navegador y sin dependencias.
 
 ---
 
@@ -61,7 +61,7 @@ Requiere **Node.js 18.13+** (solo para el servidor de desarrollo y los tests;
 la app en producción no necesita Node).
 
 ```bash
-npm start          # servidor local en http://localhost:8080
+npm start          # servidor local en http://127.0.0.1:8080
 ```
 
 Si el puerto está ocupado:
@@ -77,7 +77,7 @@ npm start -- 3000
 ### Tests
 
 ```bash
-npm test              # corre los 39 tests
+npm test              # corre los 48 tests
 npm run test:watch    # modo watch
 ```
 
@@ -140,6 +140,7 @@ navegador.
 ```
 listaSuperApp/
 ├── index.html            # Markup y orden de carga de scripts
+├── _headers              # Cabeceras de seguridad para Netlify
 ├── css/
 │   └── styles.css        # Estilos y aviso de storage no persistente
 ├── js/
@@ -150,7 +151,8 @@ listaSuperApp/
 │   └── serve.js          # Servidor estático de desarrollo (sin dependencias)
 ├── tests/
 │   ├── list.test.js      # 22 tests de la lógica de dominio
-│   └── store.test.js     # 17 tests del store
+│   ├── store.test.js     # 17 tests del store
+│   └── serve.test.js     # 9 tests del servidor de desarrollo
 ├── .github/workflows/
 │   └── tests.yml         # CI en Node 20, 22 y 24
 ├── package.json          # Scripts de npm (start, test)
@@ -168,8 +170,8 @@ La app está desplegada en:
 **<https://superlistt.netlify.app/>**
 
 Al ser un sitio estático sin build, el deploy consiste en publicar los archivos
-tal cual. Netlify sirve la raíz del repositorio y no requiere configuración
-especial.
+tal cual. Netlify sirve la raíz del repositorio y aplica automáticamente el
+archivo [`_headers`](_headers) con las cabeceras de seguridad.
 
 Para replicar el deploy en cualquier hosting estático (Netlify, Vercel, GitHub
 Pages, Cloudflare Pages, S3, nginx):
@@ -189,6 +191,43 @@ git push
    `localhost` y el dominio de producción no comparten datos.
 4. Confirmá la persistencia en DevTools → Application → Local Storage → clave
    `super-list`.
+5. Verificá las cabeceras de seguridad con `curl -I https://superlistt.netlify.app/`:
+   deben aparecer `content-security-policy`, `strict-transport-security`,
+   `x-content-type-options`, `x-frame-options`, `referrer-policy` y
+   `permissions-policy`.
+
+---
+
+## Seguridad
+
+- **CSP estricta y cabeceras de seguridad en producción** mediante
+  [`_headers`](_headers): `Content-Security-Policy`,
+  `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`,
+  `Referrer-Policy`, `Permissions-Policy` y `Cross-Origin-*`.
+- **CSP de respaldo** en `index.html` para otros hostings estáticos. Si agregás
+  scripts, estilos o recursos externos, actualizá la CSP y usá
+  `integrity`/`crossorigin` (SRI).
+- **Servidor de desarrollo endurecido**: escucha solo en `127.0.0.1`, sirve
+  únicamente `index.html`, `css/` y `js/`, acepta solo `GET`/`HEAD` y bloquea
+  dotfiles, path traversal y bytes nulos. Para exponerlo en la red local (solo
+  en redes de confianza):
+
+  ```bash
+  # PowerShell
+  $env:HOST="0.0.0.0"; npm start
+
+  # Bash
+  HOST=0.0.0.0 npm start
+  ```
+
+- **Cero dependencias de producción y cero secretos** en el repositorio. En CI
+  las actions están fijadas a commits y el token es de solo lectura.
+- La lista vive en `localStorage`: cualquier script del mismo origen o persona
+  con acceso al dispositivo puede leerla. **No guardes datos sensibles**
+  (contraseñas, datos de tarjetas, etc.).
+- Para reportar una vulnerabilidad, usá el
+  [aviso privado de seguridad de GitHub](https://github.com/mauroperez055/SuperList/security/advisories/new)
+  en lugar de un issue público.
 
 ---
 

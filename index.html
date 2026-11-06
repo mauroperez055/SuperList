@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="icon" type="image/png" href="./add-to-cart.png">
   <title>Mi Lista Del Súper</title>
@@ -47,7 +50,7 @@
     </section>
     <section class="footer-page">
       <p class="copy">&copy; 2026 <span>SuperListt</span> -</p>
-      <p class="author">Desarrollado por <a href="https://github.com/mauroperez055">Mauro Perez</a></p>
+      <p class="author">Desarrollado por <a href="https://github.com/mauroperez055" rel="noopener noreferrer">Mauro Perez</a></p>
     </section>
   </main>
 

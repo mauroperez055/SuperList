@@ -115,8 +115,13 @@
     if (total === 0) {
       const empty = document.createElement("div");
       empty.className = "empty";
-      empty.innerHTML =
-        '<span class="empty-icon" aria-hidden="true">🛒</span>Tu lista está vacía. Agregá tu primer producto.';
+
+      const emptyIcon = document.createElement("span");
+      emptyIcon.className = "empty-icon";
+      emptyIcon.setAttribute("aria-hidden", "true");
+      emptyIcon.textContent = "🛒";
+
+      empty.append(emptyIcon, "Tu lista está vacía. Agregá tu primer producto.");
       listContent.replaceChildren(empty);
     } else {
       const listItem = document.createElement("ul");
